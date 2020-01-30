@@ -1,0 +1,2 @@
+{:deps
+  {quil {:mvn/version "3.0.0"}}}
