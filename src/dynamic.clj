@@ -31,15 +31,15 @@
 (defn paint-gradient
   [hue-low hue-high]
   (q/no-stroke)
-  (doseq [y (range 0 800 5)]
-    (q/fill (q/map-range y 0 800 hue-low hue-high)
+  (doseq [y (range 0 (q/width) 5)]
+    (q/fill (q/map-range y 0 (q/width) hue-low hue-high)
             32
             100)
-    (q/rect 0 y 800 5)))
+    (q/rect 0 y (q/width) 5)))
 
 (defn paint-shape
   [hue]
-  (q/stroke hue 0 75) ; Mute the hue slightly for the shape's outline.
+  (q/stroke hue 0 5) ; Mute the hue for the shape's outline.
   (q/no-fill)
   (q/begin-shape)
   (q/vertex (/ (q/width) 2) #_(rand-int (q/width)) (/ (q/height) 2) #_(rand-int (q/height)))
@@ -56,9 +56,9 @@
 
 (defn- save-to-disk
   []
-  (q/save-frame (pp/cl-format nil
-                              "sketches/~d-~2,'0d-~2,'0d-~2,'0d-~2,'0d-~2,'0d.jpeg"
-                              (q/year) (q/month) (q/day) (q/hour) (q/minute) (q/seconds))))
+  (q/save (pp/cl-format nil
+                        "sketches/~d-~2,'0d-~2,'0d-~2,'0d-~2,'0d-~2,'0d.jpeg"
+                        (q/year) (q/month) (q/day) (q/hour) (q/minute) (q/seconds))))
 
 (defn draw
   []
