@@ -29,7 +29,7 @@
   (q/color-mode :hsb 360 100 100 1.0))
 
 (defn paint-gradient
-  [hue-low hue-high]
+  [{hue-low :bg-hue-low hue-high :bg-hue-high}]
   (q/no-stroke)
   (doseq [y (range 0 (q/width) 5)]
     (q/fill (q/map-range y 0 (q/width) hue-low hue-high)
@@ -38,11 +38,11 @@
     (q/rect 0 y (q/width) 5)))
 
 (defn paint-shape
-  [hue]
+  [{hue :shape-fill}]
   (q/stroke hue 0 5) ; Mute the hue for the shape's outline.
   (q/no-fill)
   (q/begin-shape)
-  (q/vertex (/ (q/width) 2) #_(rand-int (q/width)) (/ (q/height) 2) #_(rand-int (q/height)))
+  (q/vertex (/ (q/width) 2) (/ (q/height) 2))
   (dotimes [_ 3]
     (q/bezier-vertex (rand-int (q/width)) (rand-int (q/height))
                      (rand-int (q/width)) (rand-int (q/height))
@@ -63,7 +63,7 @@
 (defn draw
   []
   (q/no-loop)
-  (paint-gradient (get-in colours [:snow :bg-hue-low])
-                  (get-in colours [:snow :bg-hue-high]))
-  (paint-shapes (get-in colours [:snow :shape-fill]))
+  (let [colour (:snow colours)]
+    (paint-gradient colour)
+    (paint-shapes colour))
   (save-to-disk))
