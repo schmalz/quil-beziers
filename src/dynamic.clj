@@ -33,7 +33,7 @@
   (q/no-stroke)
   (doseq [y (range 0 (q/width) 5)]
     (q/fill (q/map-range y 0 (q/width) hue-low hue-high)
-            32
+            6
             100)
     (q/rect 0 y (q/width) 5)))
 
@@ -63,7 +63,7 @@
 (defn draw
   []
   (q/no-loop)
-  (let [colour (:snow colours)]
+  (let [colour (:floral-white colours)]
     (paint-gradient colour)
     (paint-shapes colour))
   (save-to-disk))
