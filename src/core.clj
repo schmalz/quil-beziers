@@ -6,6 +6,7 @@
 (q/defsketch example
   :title "Sketch"
   :setup dynamic/setup
+  :setttings dynamic/settings
   :draw dynamic/draw
   :size [1500 1500])
 
