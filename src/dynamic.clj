@@ -47,7 +47,7 @@
   (q/no-fill) ; And actually, don't fill it.
   (q/begin-shape)
   (q/vertex origin-x origin-y)
-  (dotimes [_ 4]
+  (dotimes [_ 2]
     (q/bezier-vertex (rand-int (q/width)) (rand-int (q/height))
                      (rand-int (q/width)) (rand-int (q/height))
                      (rand-int (q/width)) (rand-int (q/height))))
